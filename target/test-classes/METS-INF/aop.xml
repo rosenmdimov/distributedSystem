@@ -1,9 +1,0 @@
-<aspectj>
-    <weaver options="-Xset:weaveJavaxPackages=false -Xlint:ignore">
-        <exclude within="org.springframework..*"/>
-        <exclude within="org.hibernate..*"/>
-        <exclude within="com.sun.proxy..*"/>
-        <exclude within="jdk.proxy..*"/>
-        <include within="com.distributed.system.tests..*"/>
-    </weaver>
-</aspectj>
