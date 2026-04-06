@@ -2,7 +2,9 @@ package com.distributed.system.tests.api;
 
 import com.distributed.system.DistributedSystemApplication;
 import com.distributed.system.tests.BaseIntegrationTest;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,6 +34,7 @@ public class UserApiContainerTest extends BaseIntegrationTest {
     }
 
     @BeforeEach
+    @Step("Set Up the test environment")
     void setUp() {
 // CRITICAL: We tell RestAssured to use Spring's port, not 8080
         RestAssured.baseURI = "http://localhost";

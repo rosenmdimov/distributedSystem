@@ -17,8 +17,16 @@ public abstract class BaseIntegrationTest {
     protected static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15-alpine");
     protected static final KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.6.1"));
 
-    static {
-        Startables.deepStart(postgres, kafka).join();
+//    static {
+//        Startables.deepStart(postgres, kafka).join();
+//    }
+
+    @org.junit.jupiter.api.BeforeAll
+    @io.qameta.allure.Step("Initializing Shared Infrastructure (Postgres and Kafka)")
+    static void startContainers() {
+        if (!postgres.isRunning() || !kafka.isRunning()) {
+            Startables.deepStart(postgres, kafka).join();
+        }
     }
 
     @DynamicPropertySource

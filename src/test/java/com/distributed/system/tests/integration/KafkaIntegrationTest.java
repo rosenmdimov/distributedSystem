@@ -38,6 +38,7 @@ public class KafkaIntegrationTest {
     }
 
     @AfterAll
+    @Step("Clean up the test environment")
     public static void stopKafka() {
         if (kafkaContainer != null) kafkaContainer.stop();
     }

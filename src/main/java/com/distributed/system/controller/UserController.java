@@ -3,6 +3,7 @@ package com.distributed.system.controller;
 import com.distributed.system.model.User;
 import com.distributed.system.repository.UserRepository;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
@@ -22,10 +23,11 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Transactional
     public User create(@RequestBody User user) {
         User savedUser = repository.save(user);
         // Send a message to Kafka after a successful write to the DB
-        kafkaTemplate.send("user-topic", "Created user: " + savedUser.getEmail());
+        kafkaTemplate.send("user-topic", String.valueOf(savedUser.getId()), "Created user: " + savedUser.getEmail());
         return savedUser;
     }
 

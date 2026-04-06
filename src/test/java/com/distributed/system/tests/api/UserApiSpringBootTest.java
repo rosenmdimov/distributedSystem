@@ -2,6 +2,7 @@ package com.distributed.system.tests.api;
 
 import com.distributed.system.DistributedSystemApplication;
 import com.distributed.system.tests.BaseIntegrationTest;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,6 +42,7 @@ public class UserApiSpringBootTest extends BaseIntegrationTest {
     }
 
     @BeforeEach
+    @Step("Set Up the test environment")
     void setUp() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
